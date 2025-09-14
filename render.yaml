@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: crypto-auction-house
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run demo
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://crypto-auction-house.onrender.com/api
+      - key: NEXT_PUBLIC_SERVER_URL
+        value: https://crypto-auction-house.onrender.com
+    domains:
+      - crypto-auction-house.onrender.com
