@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server/standalone-server.js",
     "lint": "next lint",
     "server": "nodemon server/index.js",
     "server:simple": "nodemon server/simple-server.js",
+    "server:standalone": "node server/standalone-server.js",
     "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
     "demo": "concurrently \"npm run dev\" \"npm run server:simple\"",
     "setup": "node scripts/setup.js",
