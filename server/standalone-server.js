@@ -383,4 +383,5 @@ server.listen(PORT, () => {
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`⚡ Real-time bidding ready with ${auctions.size} auctions`);
   console.log(`💰 Demo mode: Users get 10 SOL + 5000 USDT for testing`);
+  console.log(`🌐 CORS enabled for Vercel frontend`);
 });
