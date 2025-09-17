@@ -21,9 +21,14 @@ export function useSocket(): UseSocketReturn {
 
     setConnecting(true)
     
-    const socket = io(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001', {
-      transports: ['websocket'],
+    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001'
+    console.log('Connecting to:', serverUrl)
+    
+    const socket = io(serverUrl, {
+      transports: ['websocket', 'polling'],
       upgrade: true,
+      timeout: 20000,
+      forceNew: true,
     })
 
     socket.on('connect', () => {

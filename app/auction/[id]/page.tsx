@@ -4,11 +4,15 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Users, Clock, TrendingUp } from 'lucide-react'
-import AuctionDetail from '@/components/AuctionDetail'
-import BiddingPanel from '@/components/BiddingPanel'
-import BidHistory from '@/components/BidHistory'
-import AuctionTimer from '@/components/AuctionTimer'
+import dynamic from 'next/dynamic'
+
+// Dynamically import components to avoid SSR issues
+const AuctionDetail = dynamic(() => import('@/components/AuctionDetail'), { ssr: false })
+const BiddingPanel = dynamic(() => import('@/components/BiddingPanel'), { ssr: false })
+const BidHistory = dynamic(() => import('@/components/BidHistory'), { ssr: false })
+const AuctionTimer = dynamic(() => import('@/components/AuctionTimer'), { ssr: false })
 import { useSocket } from '@/hooks/useSocket'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
@@ -177,8 +181,9 @@ export default function AuctionPage() {
   const { auction, bids, participantCount, remainingTime } = auctionState
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
@@ -281,6 +286,6 @@ export default function AuctionPage() {
           </div>
         </div>
       </div>
-    </div>
+    </ErrorBoundary>
   )
 }
