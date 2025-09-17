@@ -12,7 +12,6 @@ const BiddingPanel = dynamic(() => import('@/components/BiddingPanel'), { ssr: f
 const BidHistory = dynamic(() => import('@/components/BidHistory'), { ssr: false })
 const AuctionTimer = dynamic(() => import('@/components/AuctionTimer'), { ssr: false })
 import { useSocket } from '@/hooks/useSocket'
-import ErrorBoundary from '@/components/ErrorBoundary'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
@@ -181,9 +180,8 @@ export default function AuctionPage() {
   const { auction, bids, participantCount, remainingTime } = auctionState
 
   return (
-    <ErrorBoundary>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
@@ -286,6 +284,6 @@ export default function AuctionPage() {
           </div>
         </div>
       </div>
-    </ErrorBoundary>
+    </div>
   )
 }
