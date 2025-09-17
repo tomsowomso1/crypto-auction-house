@@ -8,13 +8,17 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
+    origin: ["https://whowhat-9pjdz5snw-toms-projects-6dfedece.vercel.app", "http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["https://whowhat-9pjdz5snw-toms-projects-6dfedece.vercel.app", "http://localhost:3000"],
+  credentials: true
+}));
 app.use(express.json());
 
 // Serve static files
